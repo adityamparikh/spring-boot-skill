@@ -1,7 +1,7 @@
 ---
 name: spring-boot
 description: Use when creating, modifying, or working on Spring Boot projects. Triggers: creating a new Spring Boot application, adding REST endpoints, writing Spring services or repositories, configuring Spring Data JPA, adding observability (metrics, tracing, OpenAPI), enabling virtual threads, setting up NullAway and JSpecify null safety, writing JUnit tests for Spring components, or running a Spring Boot build, or migrating/upgrading between Spring Boot versions. Applies version-appropriate best practices, writes JavaDocs, adds JUnit tests, runs the build, and checks SonarQube for violations.
-allowed-tools: Bash(*), mcp__sonarqube__*
+allowed-tools: Bash(*), WebFetch(*), WebSearch(*), mcp__sonarqube__*, mcp__claude_ai_Context7__*, mcp__plugin_context7_context7__*
 argument-hint: "[description of what to build or change]"
 ---
 
@@ -55,6 +55,23 @@ When creating a new project, default to:
 - **Java 21** (recommended LTS)
 
 Unless the user specifies otherwise.
+
+## Verify Library and Framework Usage
+
+The model's training data has a knowledge cutoff. When working with Spring Boot projects, **actively verify** that APIs, configurations, and patterns are current for the detected version:
+
+1. **Identify versions** — Check `pom.xml` or `build.gradle.kts` to determine the exact versions of Spring Boot, Spring Framework, and all key dependencies.
+2. **Look up current documentation** — Use Context7 (`mcp__claude_ai_Context7__resolve-library-id` then `mcp__claude_ai_Context7__query-docs`) to retrieve up-to-date documentation for any library or framework where:
+   - The version is newer than what the model may have been trained on
+   - You are unsure whether an API, configuration property, or pattern is still valid or has been deprecated/replaced
+   - The code uses advanced or less common features of a library
+3. **Search the web** — Use `WebSearch` and `WebFetch` to check for:
+   - Breaking changes or migration guides for the specific version in use
+   - Known security vulnerabilities (CVEs) in the dependency versions
+   - Deprecated APIs that have been replaced in newer versions
+4. **Check GitHub** — Use `gh` CLI to check release notes, changelogs, or issues for dependencies when needed (e.g., `gh api repos/{owner}/{repo}/releases/latest`)
+
+**Do not assume** that an API or pattern is correct based solely on model knowledge. When in doubt, look it up.
 
 ## Workflow
 
