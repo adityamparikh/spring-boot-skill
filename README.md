@@ -38,18 +38,14 @@ Enable NullAway with JSpecify annotations
 
 ## Installation
 
-Add this skill to your Claude Code configuration:
-
-```bash
-claude mcp add-skill spring-boot https://github.com/adityamparikh/spring-boot-skill
-```
-
-Or clone into your skills directory:
+Clone the skill into your Claude Code skills directory:
 
 ```bash
 git clone https://github.com/adityamparikh/spring-boot-skill.git ~/.claude/skills/spring-boot
 ```
 
+Claude Code will pick up the skill on the next session.
+
 ## License
 
-MIT
+Apache License 2.0 — see [LICENSE](LICENSE).

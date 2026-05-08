@@ -1,6 +1,6 @@
 ---
 name: spring-boot
-description: Use when creating, modifying, or working on Spring Boot projects. Triggers: creating a new Spring Boot application, adding REST endpoints, writing Spring services or repositories, configuring Spring Data JPA, writing validation, exception handling, configuration properties, observability (metrics, tracing, OpenAPI), enabling virtual threads, setting up NullAway and JSpecify null safety, writing JUnit tests for Spring components, or running a Spring Boot build, or migrating/upgrading between Spring Boot versions. Applies version-appropriate best practices, writes JavaDocs, adds JUnit tests, runs the build, and checks SonarQube for violations.
+description: Use when creating, modifying, or working on Spring Boot projects. Triggers: creating a new Spring Boot application, adding REST endpoints, writing Spring services or repositories, configuring Spring Data JPA, writing validation, exception handling, configuration properties, observability (metrics, tracing, OpenAPI), enabling virtual threads, setting up NullAway and JSpecify null safety, writing JUnit tests for Spring components, or running a Spring Boot build, or migrating/upgrading between Spring Boot versions. Applies version-appropriate best practices, writes JavaDocs, adds JUnit tests, and runs the build. Optionally runs SonarQube analysis when the SonarQube MCP server is configured.
 allowed-tools:
   - Bash
   - WebFetch
@@ -89,10 +89,10 @@ For every code change, follow this sequence:
 5. **Write or update tests** for every code change
 6. **Run the build** to verify compilation and tests pass
 7. **Fix any build failures** before proceeding
-8. **Run SonarQube analysis** using the SonarQube MCP server tools to check for code quality violations
-9. **Fix all SonarQube violations** and re-run the build to confirm
+8. **Run SonarQube analysis (if available)** — when the SonarQube MCP server (`mcp__sonarqube__*`) is configured, run analysis to check for code quality violations. If it is not configured, skip this step rather than blocking the task.
+9. **Fix any reported SonarQube violations** and re-run the build to confirm.
 
-Never consider a task complete until the build passes and SonarQube violations are resolved.
+Never consider a task complete until the build passes. If a SonarQube MCP server is configured, also resolve its reported violations before completion.
 
 ---
 
@@ -112,6 +112,8 @@ Enable virtual threads by default for all new and existing projects running on *
 ## Null Safety (JSpecify)
 
 Apply null safety annotations consistently across the codebase. The annotation style depends on the Spring Boot version.
+
+> **For broader JSpecify topics** — migrating from other annotation libraries (JSR-305, JetBrains `org.jetbrains.annotations.*`, Spring's `org.springframework.lang.*`, Jakarta, Android, FindBugs, Checker Framework, Eclipse JDT) using OpenRewrite, incremental adoption with `@NullUnmarked`, NullAway/Error Prone enforcement details, and Kotlin interop — use the standalone `jspecify` skill. This section covers Spring-Boot-specific JSpecify usage only (which annotations to use per Boot version, package-level marking, Optional vs `@Nullable` rules).
 
 ### Dependency
 
