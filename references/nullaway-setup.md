@@ -32,8 +32,8 @@ Configure NullAway as an Error Prone plugin to enforce null-safety at compile ti
 Also set the Java compiler to use Error Prone by adding to `<properties>`:
 
 ```xml
-<maven.compiler.source>21</maven.compiler.source>
-<maven.compiler.target>21</maven.compiler.target>
+<maven.compiler.source>25</maven.compiler.source>
+<maven.compiler.target>25</maven.compiler.target>
 ```
 
 And configure the `maven-compiler-plugin` to fork with Error Prone's `javac`:

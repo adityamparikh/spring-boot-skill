@@ -23,12 +23,12 @@ Before making any changes, detect the project's Spring Boot and Java versions:
 
 | Spring Boot | Spring Framework | Jakarta EE | Java | Jackson | JUnit |
 |-------------|-----------------|------------|------|---------|-------|
-| 3.5.x | 6.x | 9/10 | 17, 21 | 2.x | 5 (Jupiter) |
+| 3.5.x | 6.x | 9/10 | 17, 21, 25 | 2.x | 5 (Jupiter) |
 | 4.0.x | 7.x | 11 | 17, 21, 25 | 3.x | 6 |
 
 ### Version-Specific Differences
 
-**Spring Boot 4.x (Spring Framework 7 / Jakarta EE 11) -- Java 21+ recommended, virtual threads enabled by default:**
+**Spring Boot 4.x (Spring Framework 7 / Jakarta EE 11) -- Java 25 recommended, virtual threads enabled by default:**
 - Servlet containers: Tomcat 11+ or Jetty 12.1+. Undertow is NOT supported.
 - Null safety: JSpecify (`org.jspecify.annotations.*`) only.
 - API versioning: built-in `version` attribute on `@GetMapping`/`@PostMapping`.
@@ -47,7 +47,7 @@ Before making any changes, detect the project's Spring Boot and Java versions:
 
 ### New Project Defaults
 
-Default to Spring Boot 4.0.x and Java 21 unless the user specifies otherwise.
+Default to Spring Boot 4.0.x and Java 25 unless the user specifies otherwise.
 
 ## Verify Library and Framework Usage
 
