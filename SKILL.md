@@ -76,6 +76,12 @@ For every code change:
 
 Never consider a task complete until the build passes (and SonarQube violations are resolved when applicable).
 
+## Code Organization
+
+Default to **package by feature**, not by layer. Sibling top-level packages per bounded concern (`orders/`, `shipping/`, ...), package-private by default, types `public` only when another module needs them. Avoid global `controller/`, `service/`, `dto/` packages.
+
+For applications with more than ~3 features, adopt **Spring Modulith**: declare modules with `@ApplicationModule` on `package-info.java`, prefer `@ApplicationModuleListener` events for cross-module communication, and add an `ApplicationModules.of(Application.class).verify()` test. See `references/code-organization.md` for layout, dependencies, named interfaces, the event publication registry, test slicing, and observability.
+
 ## Topic-Specific Guidance
 
 Load the relevant spoke file on demand for the task at hand:
@@ -90,6 +96,7 @@ Load the relevant spoke file on demand for the task at hand:
 | `@WebMvcTest`, `@DataJpaTest`, `@SpringBootTest`, Testcontainers, mock-bean annotations | `references/testing.md` |
 | OpenAPI, Micrometer metrics, distributed tracing | `references/observability.md` |
 | NullAway / Error Prone build configuration | `references/nullaway-setup.md` |
+| Package layout (feature vs layer), Spring Modulith modules and events | `references/code-organization.md` |
 
 ## Virtual Threads
 
