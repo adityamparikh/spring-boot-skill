@@ -137,6 +137,16 @@ class OrdersModuleTests {
 
 Adding `spring-modulith-observability` instruments inter-module calls and event listeners with Micrometer / OpenTelemetry. Combined with `spring-modulith-actuator`, the live module structure is exposed at `/actuator/modulith`.
 
+## Authoritative references (when Context7 is unavailable)
+
+Fetch directly via `WebFetch` for current API and rationale:
+
+- Reference docs: <https://docs.spring.io/spring-modulith/reference/> -- canonical, version-tracked.
+- Project page (latest version, release notes): <https://spring.io/projects/spring-modulith/>.
+- Official examples: <https://github.com/spring-projects/spring-modulith/tree/main/spring-modulith-examples> -- runnable patterns for events, named interfaces, externalization, and testing.
+- Introducing Spring Modulith (design rationale): <https://spring.io/blog/2022/10/21/introducing-spring-modulith/>.
+- "Spring Modulith -- A Deep Dive" slides by Oliver Drotbohm (project lead): <https://speakerdeck.com/olivergierke/spring-modulith-a-deep-dive>.
+
 ## When NOT to modulith
 
 - Single-feature service (one CRUD aggregate) -- feature-package layout is enough; the dependency is overhead.
