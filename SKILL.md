@@ -1,6 +1,6 @@
 ---
 name: spring-boot
-description: Use when creating, modifying, or working on Spring Boot projects. Triggers: creating a new Spring Boot application, adding REST endpoints, writing Spring services or repositories, configuring Spring Data JPA, writing validation, exception handling, configuration properties, observability (metrics, tracing, OpenAPI), enabling virtual threads, setting up NullAway and JSpecify null safety, writing JUnit tests for Spring components, or running a Spring Boot build. Applies version-appropriate best practices (Boot 3.5.x and 4.0.x), writes JavaDocs, adds JUnit tests, and runs the build. Do NOT use for: full Spring Boot major-version migrations (use the spring-boot-4-migration skill instead), pure JPA/Hibernate code review (use hibernate-jpa-validator), broader JSpecify migration across non-Spring annotation libraries (use the jspecify skill), or reactive testing details (use project-reactor).
+description: Use when creating, modifying, or working on Spring Boot projects. Triggers: creating a new Spring Boot application, adding REST endpoints, writing Spring services or repositories, configuring Spring Data JPA, writing validation, exception handling, configuration properties, observability (metrics, tracing, OpenAPI), enabling virtual threads, @Async / ThreadPoolTaskExecutor / TaskDecorator / executor selection, setting up NullAway and JSpecify null safety, writing JUnit tests for Spring components, or running a Spring Boot build. Applies version-appropriate best practices (Boot 3.5.x and 4.0.x), writes JavaDocs, adds JUnit tests, and runs the build. Do NOT use for: full Spring Boot major-version migrations (use the spring-boot-4-migration skill instead), pure JPA/Hibernate code review (use hibernate-jpa-validator), broader JSpecify migration across non-Spring annotation libraries (use the jspecify skill), or reactive testing details (use project-reactor).
 allowed-tools:
   - Bash
   - WebFetch
@@ -92,6 +92,7 @@ Load the relevant spoke file on demand for the task at hand:
 | `@RestControllerAdvice`, `ProblemDetail`, RFC 7807 errors | `references/exception-handling.md` |
 | Bean Validation 3 (Jakarta), custom constraints | `references/validation.md` |
 | `@Entity`, `JpaRepository`, `@Transactional`, Hibernate notes | `references/spring-data-jpa.md` |
+| `@Async`, `ThreadPoolTaskExecutor`, `TaskDecorator`, `CompletableFuture` executor selection, MDC/Security/Trace propagation | `references/async-and-executors.md` |
 | `@ConfigurationProperties`, profiles | `references/configuration-properties.md` |
 | `@WebMvcTest`, `@DataJpaTest`, `@SpringBootTest`, Testcontainers, mock-bean annotations | `references/testing.md` |
 | OpenAPI, Micrometer metrics, distributed tracing | `references/observability.md` |
@@ -103,7 +104,7 @@ Load the relevant spoke file on demand for the task at hand:
 Enable by default on Java 21+ (`spring.threads.virtual.enabled=true`). When enabled:
 
 - Never pool virtual threads. Use `Executors.newVirtualThreadPerTaskExecutor()` for custom executors.
-- Use `ReentrantLock` instead of `synchronized` around blocking I/O (`synchronized` pins the carrier thread).
+- Use `ReentrantLock` instead of `synchronized` around blocking I/O on Java 21–24 (`synchronized` pins the carrier thread). Java 25+ fixed this via JEP 491; on the current LTS the constraint is historical, but verify any legacy dependencies still using pre-25 runtimes.
 - Avoid `ThreadLocal` for large or long-lived state. Prefer `ScopedValue` (preview on 21, stable on 25) or pass context explicitly.
 - Do not set thread priorities or daemon status -- virtual threads ignore both.
 - Remove manual thread pools for I/O tasks; the virtual thread scheduler handles them.
