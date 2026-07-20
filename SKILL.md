@@ -99,7 +99,7 @@ Load the relevant spoke file on demand for the task at hand:
 | NullAway / Error Prone build configuration | `references/nullaway-setup.md` |
 | Package layout (feature vs layer), Spring Modulith modules and events | `references/code-organization.md` |
 
-For comprehensive, in-depth testing guidance — the testing pyramid and level-selection, unit/mocking, slice tests (`@WebMvcTest`/`@DataJpaTest`/`@JdbcTest`/`@JooqTest`/`@JsonTest`/`@RestClientTest`), Testcontainers wiring (`@ServiceConnection` vs dynamic properties), integration and end-to-end tests, and context-caching performance, all with Boot 3.5.x-vs-4.x differences — see the **SivaLabs `spring-boot` testing references** (adapted from Philip Riecks' *Testing Spring Boot Applications Demystified*): <https://github.com/sivaprasadreddy/sivalabs-agent-skills/tree/main/skills/spring-boot/references>.
+For comprehensive, in-depth testing guidance, see the **SivaLabs `spring-boot` testing references** (adapted from Philip Riecks' *Testing Spring Boot Applications Demystified*): <https://github.com/sivaprasadreddy/sivalabs-agent-skills/tree/main/skills/spring-boot/references>. They cover the testing pyramid and level-selection, unit/mocking, slice tests (`@WebMvcTest`/`@DataJpaTest`/`@JdbcTest`/`@JooqTest`/`@JsonTest`/`@RestClientTest`), Testcontainers wiring (`@ServiceConnection` vs dynamic properties), integration and end-to-end tests, and context-caching performance — all with Boot 3.5.x-vs-4.x differences.
 
 ## Virtual Threads
 
