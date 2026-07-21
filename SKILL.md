@@ -99,6 +99,8 @@ Load the relevant spoke file on demand for the task at hand:
 | NullAway / Error Prone build configuration | `references/nullaway-setup.md` |
 | Package layout (feature vs layer), Spring Modulith modules and events | `references/code-organization.md` |
 
+For comprehensive, in-depth testing guidance, see the **SivaLabs `spring-boot` skill**: <https://github.com/sivaprasadreddy/sivalabs-agent-skills/tree/main/skills/spring-boot>. Its testing references cover the testing pyramid and level-selection, unit/mocking, slice tests (`@WebMvcTest`/`@DataJpaTest`/`@JdbcTest`/`@JooqTest`/`@JsonTest`/`@RestClientTest`), Testcontainers wiring (`@ServiceConnection` vs dynamic properties), integration and end-to-end tests, and context-caching performance — all with Boot 3.5.x-vs-4.x differences, adapted with credit to Philip Riecks, Paul Bakker (Netflix), Siva Katamreddy, and Dan Vega. (The expanded testing reference set is being contributed via [sivalabs-agent-skills#12](https://github.com/sivaprasadreddy/sivalabs-agent-skills/pull/12) — available once merged.)
+
 ## Virtual Threads
 
 Enable by default on Java 21+ (`spring.threads.virtual.enabled=true`). When enabled:
