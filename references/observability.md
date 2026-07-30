@@ -3,7 +3,7 @@
 ## OpenAPI Documentation (springdoc-openapi)
 
 ### Setup
-- Use `springdoc-openapi` v2.x (required for Spring Boot 3). Never use v1.x or SpringFox.
+- `springdoc-openapi` version must match the Boot generation: **Boot 3.5.x → springdoc 2.x; Boot 4.x → springdoc 3.x** (2.x does not support Jackson 3 / Spring Framework 7). Never use v1.x or SpringFox.
 - Add the appropriate starter dependency:
   - Web MVC with Swagger UI: `springdoc-openapi-starter-webmvc-ui`
   - Web MVC API only: `springdoc-openapi-starter-webmvc-api`
