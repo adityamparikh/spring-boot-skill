@@ -12,6 +12,14 @@ allowed-tools:
 
 # Spring Boot Development Skill
 
+## Currency
+
+**Last verified: 2026-07** (Spring Boot 4.1 era). Facts here age. If the answer hinges on a
+version-sensitive fact — a Boot minor, a pinned plugin version, a JDK feature's release, a default that names a version — and time has passed
+since the stamp above, spot-check current release notes or the tool's own source
+before asserting it. When current docs disagree with this file, **the docs win**:
+say so and note the line is stale.
+
 ## Version Detection
 
 Before making any changes, detect the project's Spring Boot and Java versions:
@@ -28,7 +36,7 @@ Before making any changes, detect the project's Spring Boot and Java versions:
 
 ### Version-Specific Differences
 
-**Spring Boot 4.x (Spring Framework 7 / Jakarta EE 11) -- Java 25 recommended, virtual threads enabled by default:**
+**Spring Boot 4.x (Spring Framework 7 / Jakarta EE 11) -- Java 25 recommended; virtual threads remain opt-in via `spring.threads.virtual.enabled=true` (recommended for new 4.x projects):**
 - Servlet containers: Tomcat 11+ or Jetty 12.1+. Undertow is NOT supported.
 - Null safety: JSpecify (`org.jspecify.annotations.*`) only.
 - API versioning: built-in `version` attribute on `@GetMapping`/`@PostMapping`.
@@ -106,7 +114,7 @@ For comprehensive, in-depth testing guidance, see the **SivaLabs `spring-boot` s
 Enable by default on Java 21+ (`spring.threads.virtual.enabled=true`). When enabled:
 
 - Never pool virtual threads. Use `Executors.newVirtualThreadPerTaskExecutor()` for custom executors.
-- Use `ReentrantLock` instead of `synchronized` around blocking I/O on Java 21–24 (`synchronized` pins the carrier thread). Java 25+ fixed this via JEP 491; on the current LTS the constraint is historical, but verify any legacy dependencies still using pre-25 runtimes.
+- Use `ReentrantLock` instead of `synchronized` around blocking I/O on Java 21–23 (`synchronized` pins the carrier thread). Java 24+ fixed this via JEP 491, so on Java 24 or later the constraint is historical — verify only if a legacy runtime is still in play.
 - Avoid `ThreadLocal` for large or long-lived state. Prefer `ScopedValue` (preview on 21, stable on 25) or pass context explicitly.
 - Do not set thread priorities or daemon status -- virtual threads ignore both.
 - Remove manual thread pools for I/O tasks; the virtual thread scheduler handles them.
