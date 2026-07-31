@@ -22,12 +22,12 @@ Configure NullAway as an Error Prone plugin to enforce null-safety at compile ti
             <path>
                 <groupId>com.google.errorprone</groupId>
                 <artifactId>error_prone_core</artifactId>
-                <version>2.36.0</version>
+                <version>2.50.0</version>
             </path>
             <path>
                 <groupId>com.uber.nullaway</groupId>
                 <artifactId>nullaway</artifactId>
-                <version>0.12.6</version>
+                <version>0.13.8</version>
             </path>
         </annotationProcessorPaths>
     </configuration>
