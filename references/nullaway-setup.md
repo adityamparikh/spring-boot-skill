@@ -1,5 +1,10 @@
 # NullAway Build Configuration
 
+> **This mirrors the `jspecify` skill's `references/enforcement.md`.** Both carry the
+> same Maven/Gradle Error Prone + NullAway setup, and they have drifted apart before.
+> When you bump a version here, bump it there too — or delete this file and point at
+> that skill, which owns the broader JSpecify story.
+
 Configure NullAway as an Error Prone plugin to enforce null-safety at compile time. The build must fail on any violation.
 
 **Maven** -- add Error Prone + NullAway to the compiler plugin:
@@ -17,12 +22,12 @@ Configure NullAway as an Error Prone plugin to enforce null-safety at compile ti
             <path>
                 <groupId>com.google.errorprone</groupId>
                 <artifactId>error_prone_core</artifactId>
-                <version>2.36.0</version>
+                <version>2.50.0</version>
             </path>
             <path>
                 <groupId>com.uber.nullaway</groupId>
                 <artifactId>nullaway</artifactId>
-                <version>0.12.6</version>
+                <version>0.13.8</version>
             </path>
         </annotationProcessorPaths>
     </configuration>
@@ -58,12 +63,12 @@ And configure the `maven-compiler-plugin` to fork with Error Prone's `javac`:
 
 ```groovy
 plugins {
-    id 'net.ltgt.errorprone' version '4.1.0'
+    id 'net.ltgt.errorprone' version '5.1.0'
 }
 
 dependencies {
-    errorprone 'com.google.errorprone:error_prone_core:2.36.0'
-    errorprone 'com.uber.nullaway:nullaway:0.12.6'
+    errorprone 'com.google.errorprone:error_prone_core:2.50.0'
+    errorprone 'com.uber.nullaway:nullaway:0.13.8'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -79,12 +84,12 @@ tasks.withType(JavaCompile).configureEach {
 
 ```kotlin
 plugins {
-    id("net.ltgt.errorprone") version "4.1.0"
+    id("net.ltgt.errorprone") version "5.1.0"
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
-    errorprone("com.uber.nullaway:nullaway:0.12.6")
+    errorprone("com.google.errorprone:error_prone_core:2.50.0")
+    errorprone("com.uber.nullaway:nullaway:0.13.8")
 }
 
 tasks.withType<JavaCompile>().configureEach {

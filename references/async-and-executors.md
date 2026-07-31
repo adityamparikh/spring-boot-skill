@@ -241,7 +241,7 @@ TaskExecutor ordersExecutor() {
 
 - **Don't pool virtual threads.** They are cheap to create; pooling defeats the model.
 - **`@Async` pitfalls 1–4 still apply.** Proxy bypass, transaction non-inheritance, exception loss, and ThreadLocal loss are independent of the underlying thread implementation. `TaskDecorator` is still needed.
-- On Java 21–24, replace `synchronized { I/O }` blocks with `ReentrantLock` to avoid pinning (fixed in Java 25 via JEP 491).
+- On Java 21–23, replace `synchronized { I/O }` blocks with `ReentrantLock` to avoid pinning (fixed in Java 24 via JEP 491).
 
 See the `java-performance` skill's `references/virtual-threads.md` for VT mechanics, pinning detection, and the connection-pool deadlock pattern.
 
@@ -302,7 +302,7 @@ Async stack traces are notoriously hard to debug. Two things help:
 | No `TaskDecorator` on `ThreadPoolTaskExecutor` | `MDC` shows no `traceId` in async log lines; `SecurityContextHolder.getContext().getAuthentication()` is null | Add `ContextPropagatingTaskDecorator` (Spring 6.1+ built-in) |
 | Unbounded queue (`Executors.newFixedThreadPool`) | Memory grows under load; tasks queue indefinitely | Bounded `queueCapacity` + `CallerRunsPolicy` |
 | Mixing CPU + IO on one executor | One workload starves the other | Separate `ThreadPoolTaskExecutor` per workload |
-| `synchronized { I/O }` on virtual threads (Java 21–24) | VT pinning; carrier-thread exhaustion under load | `ReentrantLock` (or upgrade to Java 25) |
+| `synchronized { I/O }` on virtual threads (Java 21–23) | VT pinning; carrier-thread exhaustion under load | `ReentrantLock` (or upgrade to Java 24+) |
 | `@Async` method that does `dataSource.getConnection()` (or JPA call) without `@Transactional` | Connection acquired, never released cleanly | Add `@Transactional` on the `@Async` method |
 | `@Async` fanning out N parallel DB calls inside an outer `@Transactional` | `hikaricp_connections_acquire_seconds` spikes; pool starvation | Size pool for N+1; or use `@TransactionalEventListener(AFTER_COMMIT)` to defer |
 
