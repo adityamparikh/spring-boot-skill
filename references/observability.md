@@ -3,7 +3,12 @@
 ## OpenAPI Documentation (springdoc-openapi)
 
 ### Setup
-- `springdoc-openapi` version must match the Boot generation: **Boot 3.5.x → springdoc 2.x; Boot 4.x → springdoc 3.x** (2.x does not support Jackson 3 / Spring Framework 7). Never use v1.x or SpringFox.
+- `springdoc-openapi` version must match the Boot generation: **Boot 3.5.x → springdoc 2.x; Boot 4.x → springdoc 3.x**. Never use v1.x or SpringFox.
+- **Jackson 3 is not settled here.** Boot 4 favours Jackson 3, but springdoc 3.x still
+  builds against Jackson 2, and the mismatch is tracked in open issues
+  (springdoc/springdoc-openapi#3200, #3169, #3268). Expect friction if you rely on a
+  custom `ObjectMapper`, and check those issues before assuming it works — this is
+  exactly the kind of claim the Currency rule exists for.
 - Add the appropriate starter dependency:
   - Web MVC with Swagger UI: `springdoc-openapi-starter-webmvc-ui`
   - Web MVC API only: `springdoc-openapi-starter-webmvc-api`
